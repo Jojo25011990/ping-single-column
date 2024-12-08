@@ -1,0 +1,17 @@
+{
+	"name": "ping-coming-soon-page-master",
+	"version": "1.0.0",
+	"description": "This is a solution to the [Ping coming soon page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/ping-single-column-coming-soon-page-5cadd051fec04111f7b848da). Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon -e scss -x \"npm run sass\"",
+		"sass": "sass sass/main.scss css/style.css --no-source-map"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^3.1.7",
+		"sass": "^1.82.0"
+	}
+}

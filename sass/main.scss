@@ -1,0 +1,232 @@
+@forward './reset';
+
+// *** Variables ***
+$color-primary: #4c7bf3;
+$color-secondary: #15202a;
+$color-placeholder: #b8c7ed;
+$color-border: #c2d3ff;
+$color-grey: #969696;
+$color-grey-dark: #9b9b9b;
+$color-white: #fff;
+$color-black: #000;
+$color-error: #ff5466;
+
+// *** Mixins ***
+@mixin flex-settings($direction, $justify, $align, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+@mixin font-settings($size, $weight, $line-height, $l-spacing) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $l-spacing;
+}
+
+// *** Main Styles ***
+
+html {
+  @media (max-width: 720px) {
+    font-size: 50%;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 40%;
+  }
+}
+
+body {
+  @include flex-settings(row, center, center);
+  min-height: 100vh;
+
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: normal;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.ping {
+  @include flex-settings(column, center, center);
+
+  width: 100%;
+  max-width: 144rem;
+  min-height: 80rem;
+  text-align: center;
+
+  &__logo {
+    width: 9rem;
+    height: 3.9rem;
+    margin-bottom: 4rem;
+  }
+
+  &__content {
+    margin-bottom: 9.4rem;
+  }
+
+  &__heading {
+    @include font-settings(4.8rem, 300, 6rem, null);
+    color: $color-grey;
+    margin-bottom: 1.6rem;
+
+    @media (max-width: 420px) {
+      @include font-settings(3.8rem, 300, 3.2rem, null);
+      margin-bottom: 3rem;
+    }
+
+    &-soon {
+      color: #15202a;
+      font-weight: 700;
+    }
+  }
+
+  &__text {
+    @include font-settings(2rem, 300, null, null);
+    color: #15202a;
+    margin-bottom: 4rem;
+  }
+
+  &__form {
+    position: relative;
+    @include flex-settings(row, null, null, $gap: 1.6rem);
+
+    @media (max-width: 550px) {
+      @include flex-settings(column, null, center, $gap: 4rem);
+    }
+
+    &-input {
+      width: 100%;
+      max-width: 42.1rem;
+      height: 5.6rem;
+      padding-left: 2.5rem;
+      background-color: $color-white;
+      border: 0.1rem solid $color-border;
+      border-radius: 2.8rem;
+      box-shadow: 0 0 0.7rem 0.3rem rgba($color: #000000, $alpha: 0.01);
+      transition: border-color 0.3s;
+
+      @media (max-width: 550px) {
+        margin-bottom: 3rem;
+      }
+
+      &::placeholder {
+        @include font-settings(1.6rem, 300, 2rem, null);
+        color: $color-placeholder;
+
+        @media (max-width: 420px) {
+          font-size: 1.8rem;
+        }
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      // *** Error Border ***
+      &.error-border {
+        transition: border-color 0.3s;
+        border-color: $color-error;
+      }
+    }
+    // *** Error Message ***
+
+    &-message {
+      @include font-settings(1.2rem, 400, 2rem, null);
+      font-style: italic;
+      color: $color-error;
+      position: absolute;
+      bottom: -2.5rem;
+      left: 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+
+      @media (max-width: 550px) {
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -70%);
+        font-size: 1.8rem;
+      }
+
+      &.error-message {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s;
+      }
+    }
+
+    &-btn {
+      @include font-settings(1.6rem, 600, 5.6rem, 0.1rem);
+
+      width: 100%;
+      max-width: 20rem;
+      height: 5.6rem;
+      color: $color-white;
+      background-color: $color-primary;
+      border-radius: 2.8rem;
+      box-shadow: 0 0.5rem 1rem 0.2rem
+        rgba($color: $color-primary, $alpha: 0.23);
+
+      cursor: pointer;
+      transition: background-color 0.25s;
+
+      @media (max-width: 550px) {
+        max-width: 42.1rem;
+      }
+
+      &:hover,
+      &:active {
+        background-color: rgba($color: $color-primary, $alpha: 0.8);
+      }
+    }
+  }
+
+  &__imgBox {
+    width: 100%;
+    max-width: 64rem;
+    height: 38.3rem;
+    margin-bottom: 7.2rem;
+
+    @media (max-width: 420px) {
+      max-width: 50rem;
+      height: auto;
+    }
+  }
+
+  &__list {
+    @include flex-settings(row, center, center, 1.2rem);
+    margin-bottom: 2.5rem;
+
+    &-link {
+      &:link,
+      &:visited {
+        @include flex-settings(row, center, center);
+        font-size: 1.6rem;
+
+        color: $color-primary;
+        transition: color 0.25s, background-color 0.25s;
+        border-radius: 50%;
+        border: 0.1rem solid rgba($color: $color-primary, $alpha: 0.15);
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+
+      &:hover,
+      &:active {
+        color: $color-white;
+        background-color: $color-primary;
+      }
+    }
+  }
+
+  &__copyright {
+    @include font-settings(1.2rem, 300, null, null);
+    color: $color-grey-dark;
+  }
+}
